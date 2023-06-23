@@ -1,97 +1,57 @@
 package com.geekbrains.javacore.lesson4;
 /*
-* Класс «Эмуляция интернет-магазина».
-1. Написать классы покупатель (ФИО, возраст, телефон), товар (название, цена) и заказ (объект покупатель, объект товар, целочисленное количество).
-2. Создать массив покупателей (инициализировать 2 элемента), массив товаров (инициализировать 5 элементов) и массив заказов (пустой на 5 элементов).
-3. Создать статический метод «совершить покупку» со строковыми параметрами, соответствующими полям объекта заказа. Метод должен вернуть объект заказа.
-4. Если в метод передан несуществующий покупатель – метод должен выбросить исключение CustomerException, если передан несуществующий товар, метод
-должен выбросить исключение ProductException, если было передано отрицательное или слишком больше значение количества (например, 100),
-*  метод должен выбросить исключение AmountException.
+1. Р РµР°Р»РёР·РѕРІР°С‚СЊ Р»РѕРіРёРєСѓ РїСЂРёР»РѕР¶РµРЅРёСЏ РњР°РіР°Р·РёРЅ РёР· РѕРїРёСЃР°РЅРёСЏ Рє СѓСЂРѕРєСѓ.
 
-5. Вызвать метод совершения покупки несколько раз таким образом, чтобы заполнить массив покупок возвращаемыми значениями. Обработать исключения сле-
-дующим образом (в заданном порядке): – если был передан неверный товар – вывести в консоль сообщение об ошибке, не совершать данную покупку;
+2. Р”РѕР±Р°РІРёС‚СЊ РїРµСЂРµС‡РёСЃР»РµРЅРёРµ СЃ РіРµРЅРґРµСЂР°РјРё. Р’ РєР»Р°СЃСЃ РїРѕРєСѓРїР°С‚РµР»СЏ РґРѕР±Р°РІРёС‚СЊ СЃРІРѕР№СЃС‚РІРѕ В«РїРѕР»В» СЃРѕ Р·РЅР°С‡РµРЅРёРµРј СЃРѕР·РґР°РЅРЅРѕРіРѕ РїРµСЂРµС‡РёСЃР»РµРЅРёСЏ. Р”РѕР±Р°РІРёС‚СЊ РіРµС‚С‚РµСЂС‹, СЃРµС‚С‚РµСЂС‹.
 
-– если было передано неверное количество – купить товар в количестве 1;
-– если был передан неверный пользователь – завершить работу приложения
-с исключением.
+3. Р”РѕР±Р°РІРёС‚СЊ РІ РїСЂРёР»РѕР¶РµРЅРёРµ РњР°РіР°Р·РёРЅ СѓС‡РµС‚ С†РµРЅС‹ С‚РѕРІР°СЂР° - РІ Р—Р°РєР°Р· РґРѕР±Р°РІРёС‚СЊ РїРѕР»Рµ СЃС‚РѕРёРјРѕСЃС‚СЊ. Р”РѕР±Р°РІРёС‚СЊ РїРµСЂРµС‡РёСЃР»РµРЅРёРµ СЃ СЂР°Р·РјРµСЂР°РјРё СЃРєРёРґРѕРє - 0, 5, 10, 15, 20%.
+РќР°РїРёСЃР°С‚СЊ РјРµС‚РѕРґ, РїСЂРё РІС‹Р·РѕРІРµ РєРѕС‚РѕСЂРѕРіРѕ РЅР° РїРµСЂРµРґР°РЅРЅС‹Р№ С‚РёРї С‚РѕРІР°СЂР° РЅР°Р·РЅР°С‡Р°РµС‚СЃСЏ СЂР°РЅРґРѕРјРЅРѕ СЃРєРёРґРєР° РёР· РїРµСЂРµС‡РёСЃР»РµРЅРёСЏ (РјРµРЅСЏРµРј Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ price)
 
-6. Вывести в консоль итоговое количество совершённых покупок после выполнения основного кода приложения.
-*
+** РўРѕРІР°СЂР°Рј РґРѕР±Р°РІРёС‚СЊ РєР°С‚РµРіРѕСЂРёСЋ. Р—Р°РґР°С‚СЊ РєР°С‚РµРіРѕСЂРёРё РЎС‚Р°РЅРґР°СЂС‚ Рё РџСЂРµРјРёСѓРј. Р•СЃР»Рё РЅР° С‚РѕРІР°СЂ РєР°С‚РµРіРѕСЂРёРё РџСЂРµРјРёСѓРј РЅР°Р·РЅР°С‡РёР»Р°СЃСЊ СЃРєРёРґРєР° Р±РѕР»РµРµ 15%,
+РІС‹Р±СЂРѕСЃРёС‚СЊ РёСЃРєР»СЋС‡РµРЅРёРµ TooMuchSaleException(msg), СЃРѕРѕР±С‰РµРЅРёРµ СЃ РѕС€РёР±РєРѕР№ РІС‹РІРµСЃС‚Рё РІ РєРѕРЅСЃРѕР»СЊ, С†РµРЅСѓ С‚РѕРІР°СЂР° РЅРµ РјРµРЅСЏС‚СЊ.
 * */
 
 public class MainApp {
 
-    static Customer[] customers = null;
-    static Product[] products = null;
-
     public static void main(String[] args) {
 
-
-        customers = new Customer[]{
-                new Customer("Ivan", "Semenov", 25, "+79604564444"),
-                new Customer("Petr", "Kolosov", 32, "+796045654232")
-        };
-
-        products = new Product[]{
-                new Product("Milk", 100.5f),
-                new Product("Bread", 70.8f),
-                new Product("Meat", 1000),
-                new Product("Chocolate", 225.6f),
-                new Product("Tea", 300),
-
-        };
-
-        Order[] orders = new Order[5];
-
-        String[] phones = {"+79604564444", "+796045654232", "+734556555", "+796045654232", "+79604564444"};
-        String[] productTitles = {"Milk", "Water", "Meat", "Tea", "Chocolate"};
-        int[] amounts = {4, 5, 101, 0, -1};
-
-        int count =0;
-        for (int i = 0; i < 5; i++) {
+        Shop shop = new Shop();
+        int i = 0;
+        int discount;
+        while (shop.capacity != shop.orders.length && i != shop.dataBase.length) {
+            discount = shop.chooseRandomDiscount();
             try {
-                orders[i] = makePurchase(phones[i], productTitles[i], amounts[i]);
-                count++;
+
+                shop.orders[shop.capacity] = shop.makePurchase(((Customer) shop.dataBase[i][0]).getPhone(), ((Product) shop.dataBase[i][1]).getTitle(), (int) shop.dataBase[i][2], discount);
+                shop.capacity++;
+                System.out.println("Order price is " + shop.orders[i].getOrderPrice() + ". Product category: " + ((Product) shop.dataBase[i][1]).getProductCategory());
             } catch (ProductException e) {
                 System.out.println(e.getMessage());
+
             } catch (AmountException e) {
-                orders[i] = makePurchase(phones[i], productTitles[i], 1);
-                System.out.println("Изменили на 1");
-                count++;
+                System.out.print("It was AmountException.Changed amount to 1.\n");
+                try {
+                    shop.orders[shop.capacity] = shop.makePurchase(((Customer) shop.dataBase[i][0]).getPhone(), ((Product) shop.dataBase[i][1]).getTitle(), 1, discount);
+                    shop.capacity++;
+                    System.out.println("Order price is " + shop.orders[i].getOrderPrice() + ". Product category: " + ((Product) shop.dataBase[i][1]).getProductCategory());
+                } catch (TooMuchSaleException ex){
+                    System.out.println(ex.getMessage());
+                    shop.orders[shop.capacity] = shop.makePurchase(((Customer) shop.dataBase[i][0]).getPhone(), ((Product) shop.dataBase[i][1]).getTitle(), 1, 0);
+                    shop.capacity++;
+                    System.out.println("Order price is " + shop.orders[i].getOrderPrice() + ". Product category: " + ((Product) shop.dataBase[i][1]).getProductCategory());
+                }
 
-            } catch (CustomerException e) {
+            } catch (TooMuchSaleException e) {
                 System.out.println(e.getMessage());
+                shop.orders[shop.capacity++] = shop.makePurchase(((Customer) shop.dataBase[i][0]).getPhone(), ((Product) shop.dataBase[i][1]).getTitle(), (int) shop.dataBase[i][2], 0);
+                System.out.println("Order price is " + shop.orders[i].getOrderPrice() + ". Product category: " + ((Product) shop.dataBase[i][1]).getProductCategory());
+            } catch (CustomerException e) {
+                throw new RuntimeException(e);
+            } finally {
+                System.out.println("Total orders made: " + shop.capacity);
+                System.out.println("------------------------------------------------------------------------------------");
             }
+            ++i;
         }
-
-        System.out.println("Количество совершенных покупок: " + count);
-    }
-
-    public static Order makePurchase(String phone, String title, int amount) throws CustomerException, ProductException, AmountException {
-        Customer customer = null;
-        Product product = null;
-        for (Customer c : customers) {
-            if (c.getPhone().equals(phone)) {
-                customer = c;
-            }
-        }
-
-        for (Product p : products) {
-            if (p.getTitle().equals(title)) {
-                product = p;
-            }
-        }
-        if (customer == null) {
-            throw new CustomerException("Customer not found");
-        }
-
-        if (product == null) {
-            throw new ProductException("Product not found");
-        }
-
-        if ((amount > 100) || (amount < 1)) {
-            throw new AmountException("Amount is not correct");
-        }
-        return new Order(customer, product, amount);
     }
 }

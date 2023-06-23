@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java/com/geekbrains/javacore/lesson4/Customer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/geekbrains/javacore/lesson4/MainApp.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/geekbrains/javacore/lesson4/Order.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/geekbrains/javacore/lesson4/ProductCategory.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/geekbrains/javacore/lesson4/Sex.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/geekbrains/javacore/lesson4/Shop.java" charset="UTF-8" />
+  </component>
+</project>

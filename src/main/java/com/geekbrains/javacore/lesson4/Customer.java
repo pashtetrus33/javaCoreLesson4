@@ -6,12 +6,14 @@ public class Customer {
     private String lastName;
     private int age;
     private String phone;
+    private Sex sex;
 
-    public Customer(String firstName, String lastName, int age, String phone) {
+    public Customer(String firstName, String lastName, int age, String phone, Sex sex) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.phone = phone;
+        this.sex = sex;
     }
 
     public String getFirstName() {
@@ -44,5 +46,13 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
     }
 }
